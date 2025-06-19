@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test';
 
 test.beforeEach(async ({ page }, testInfo) => {
-    await page.goto('http://uitestingplayground.com/ajax');
+    await page.goto(process.env.URL);
     await page.getByText('Button Triggering AJAX Request').click();
-    testInfo.setTimeout(testInfo.timeout + 10000); // 10 seconds
+    testInfo.setTimeout(testInfo.timeout + 2000); // 10 seconds
 })
 
 test('Auto waiting', async ({ page }) => {
@@ -43,5 +43,5 @@ test('Timeouts', async ({ page }) => {
     // test.slow(); // slow test
     const successButton = page.locator('.bg-success');
 
-    await successButton.click({ timeout: 15000 });
+    await successButton.click({ timeout: 17000 });
 })
