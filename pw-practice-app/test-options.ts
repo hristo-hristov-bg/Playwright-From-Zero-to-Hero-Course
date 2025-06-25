@@ -14,6 +14,7 @@ export const test = base.extend<TestOptions>({
         await page.getByText('Forms').click();
         await page.getByText('Form Layouts').click();
         await use('');
+        console.log('Tear down');
     },
 
     pageManager: async ({ page, formLayoutsPage }, use) => {
