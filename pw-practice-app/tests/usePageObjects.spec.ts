@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
     await page.goto('/');
 })
 
-test('Navigate to Form Page', async ({ page }) => {
+test('Navigate to Form Page @smoke @regression', async ({ page }) => {
     const pm = new PageManager(page);
     await pm.navigateTo().formLayoutsPage();
     await pm.navigateTo().datepickerPage();

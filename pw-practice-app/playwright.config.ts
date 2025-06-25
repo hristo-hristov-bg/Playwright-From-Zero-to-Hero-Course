@@ -10,7 +10,11 @@ export default defineConfig<TestOptions>({
     timeout: 2000, // global timeout for all expect statements
   },
   retries: 1,
-  reporter: 'html',
+  reporter: [
+    ['json', { outputFile: 'test-results/jsonReport.json' }],
+    ['junit', { outputFile: 'test-results/junitReport.xml' }],
+    ['allure-playwright']
+  ],
   use: {
     globalsQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
     baseURL: process.env.DEV === '1' ? 'http://localhost:4201/'
@@ -49,6 +53,13 @@ export default defineConfig<TestOptions>({
       use: {
         viewport: { width: 1920, height: 1080 },
       }
-    }
+    },
+    {
+      name: 'mobile',
+      testMatch: 'testMobile.spec.ts',
+      use: {
+        ...devices['iPhone 13 Pro']
+      }
+    },
   ],
 });
