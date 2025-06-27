@@ -1,27 +1,41 @@
 name: Playwright Tests
+
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
+
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm ci --force
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps --force
-    - name: Run Playwright tests
-      run: npm run pageObjects-chrome 
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        working-directory: ./pw-practice-app
+        run: npm ci --force
+
+      - name: Install Playwright Browsers
+        working-directory: ./pw-practice-app
+        run: npx playwright install --with-deps --force
+
+      - name: Run Playwright tests
+        working-directory: ./pw-practice-app
+        run: npm run pageObjects-chrome
+
+      - name: Upload Playwright report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: pw-practice-app/playwright-report/
+          retention-days: 30
