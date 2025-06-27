@@ -5,7 +5,7 @@ require('dotenv').config();
 
 export default defineConfig<TestOptions>({
   timeout: 40000,
-  globalTimeout: 60000,
+  // globalTimeout: 60000,
   expect: {
     timeout: 2000, // global timeout for all expect statements
   },
@@ -62,4 +62,8 @@ export default defineConfig<TestOptions>({
       }
     },
   ],
+  webServer: {
+    command: 'npm run start',
+    url: 'http://localhost:4200/',
+  }
 });
