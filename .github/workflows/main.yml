@@ -21,15 +21,15 @@ jobs:
           node-version: lts/*
 
       - name: Install dependencies
-        working-directory: ./your-folder-name
+        working-directory: ./pw-practice-app
         run: npm ci --force
 
       - name: Install Playwright Browsers
-        working-directory: ./your-folder-name
+        working-directory: ./pw-practice-app
         run: npx playwright install --with-deps --force
 
       - name: Run Playwright tests
-        working-directory: ./your-folder-name
+        working-directory: ./pw-practice-app
         run: npm run pageObjects-chrome
 
       - name: Upload Playwright report
@@ -37,5 +37,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
-          path: your-folder-name/playwright-report/
+          path: pw-practice-app/playwright-report/
           retention-days: 30
+
